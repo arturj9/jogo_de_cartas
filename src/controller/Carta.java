@@ -1,5 +1,6 @@
 package controller;
 
+
 import javax.swing.ImageIcon;
 
 public class Carta {
