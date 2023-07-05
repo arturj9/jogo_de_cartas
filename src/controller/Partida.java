@@ -3,21 +3,12 @@ package controller;
 import java.util.ArrayList;
 
 public class Partida {
-	private Baralho baralho;
+
 	private ArrayList<Jogador> jogadores;
 	private ArrayList<Rodada> rodadas;
 
-	public Partida(Baralho baralho, ArrayList<Jogador> jogadores) {
-		setBaralho(baralho);
+	public Partida(ArrayList<Jogador> jogadores) {
 		setJogadores(jogadores);
-	}
-
-	public Baralho getBaralho() {
-		return baralho;
-	}
-
-	public void setBaralho(Baralho baralho) {
-		this.baralho = baralho;
 	}
 
 	public ArrayList<Jogador> getJogadores() {

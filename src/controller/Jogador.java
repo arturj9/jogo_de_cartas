@@ -6,10 +6,10 @@ public class Jogador {
 	private Baralho baralho;
 	private int pontuacao;
 
-	public Jogador(String nome, Baralho baralho, int pontuacao) {
+	public Jogador(String nome, int pontuacao) {
 		setNome(nome);
-		setBaralho(baralho);
 		setPontuacao(pontuacao);
+		setBaralho();
 	}
 
 	public Jogador(String nome, Baralho baralho) {
@@ -31,7 +31,12 @@ public class Jogador {
 	}
 
 	public void setBaralho(Baralho baralho) {
-		this.baralho = baralho;
+		if(baralho.getCartas().size()==6)
+			this.baralho = baralho;
+	}
+	
+	public void setBaralho() {
+			this.baralho = new BaralhoJogo().getCartas(6);
 	}
 
 	public int getPontuacao() {

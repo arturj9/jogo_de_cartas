@@ -1,27 +1,26 @@
 package controller;
 
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
 
-public class Carta {
-	private String caminho;
+public class Carta extends ImageIcon {
 	private boolean sorteada;
 
 	public Carta(String caminho) {
-		setCaminho(caminho);
+		super(caminho);
 		setSorteada(false);
 	}
 	
-	public ImageIcon getIcon() {
-		return new ImageIcon(caminho);
+	public ImageIcon getIcon(int width, int heigth) {
+		Image resizedImage = getImage().getScaledInstance(width, heigth, Image.SCALE_SMOOTH);
+		return new ImageIcon(resizedImage);
+	}
+	
+	public ImageIcon getIcon90() {
+		return getIcon(300,300);
 	}
 
-	public String getCaminho() {
-		return caminho;
-	}
-
-	public void setCaminho(String caminho) {
-		this.caminho = caminho;
-	}
 
 	public boolean isSorteada() {
 		return sorteada;
