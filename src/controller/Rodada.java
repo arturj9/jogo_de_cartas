@@ -7,7 +7,7 @@ public class Rodada {
 	private Jogador jogadorDaVez;
 	private ArrayList<Jogador> jogadores;
 
-	public Rodada(Jogador jogador, ArrayList<Jogador> jogadores) {
+	public Rodada(Jogador jogadorDaVez, ArrayList<Jogador> jogadores) {
 		setJogadorDaVez(jogadorDaVez);
 		setJogadores(jogadores);
 	}
@@ -19,6 +19,7 @@ public class Rodada {
 	public void calcularPontuacao() {
 
 	}
+	
 
 	public ArrayList<Jogador> getJogadores() {
 		return jogadores;

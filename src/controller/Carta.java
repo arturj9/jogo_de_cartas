@@ -15,8 +15,8 @@ public class Carta extends ImageIcon {
 		return new ImageIcon(resizedImage);
 	}
 	
-	public ImageIcon getIcon90() {
-		return getIcon(300,300);
+	public ImageIcon getIcon() {
+		return getIcon(200,500);
 	}
 
 
