@@ -10,8 +10,8 @@ public class Conexao {
 
 	public Conexao() {
 
-		this.host = "127.0.0.1";
-		this.banco = "tec_prog2023"; // segundo seu PC
+		this.host = "localhost:3333";
+		this.banco = "banco_de_rodadas"; // segundo seu PC
 		this.usuario = "root"; // segundo seu PC
 		this.senha = ""; // segundo seu PC
 	}

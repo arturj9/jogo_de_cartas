@@ -3,15 +3,16 @@ package controller;
 import java.util.ArrayList;
 
 public class Jogador {
-
+	private int id;
 	private String nome;
 	private Baralho baralho;
 	private ArrayList<Integer> pontuacao;
 
-	public Jogador(String nome, ArrayList<Integer> pontuacao) {
+	public Jogador(int id, String nome, ArrayList<Integer> pontuacao) {
 		setNome(nome);
 		setPontuacao(pontuacao);
 		setBaralho();
+		this.id = id;
 	}
 
 	public Jogador(String nome, Baralho baralho) {
@@ -56,5 +57,14 @@ public class Jogador {
 	public void setPontuacao(ArrayList<Integer> pontuacao) {
 		this.pontuacao = pontuacao;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 
 }
