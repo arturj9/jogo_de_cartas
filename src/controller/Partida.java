@@ -2,6 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.RodadasDAO;
+
 public class Partida {
 
 	private ArrayList<Jogador> jogadores;
@@ -10,9 +12,12 @@ public class Partida {
 	public Partida(ArrayList<Jogador> jogadores) {
 		setJogadores(jogadores);
 		setRodadas(new ArrayList<Rodada>());
+		Jogador jogadorDaVez = jogadores.get(0);
+		rodadas.add(new Rodada(jogadorDaVez, getJogadoresComuns(jogadorDaVez)));
 	}
 
 	public void proximaRodada() {
+		new RodadasDAO().inserir(getRodadaAtual());
 		Jogador proximoJogadorDaVez = getProximoJogadorDaVez();
 		rodadas.add(new Rodada(proximoJogadorDaVez, getJogadoresComuns(proximoJogadorDaVez)));
 	}
@@ -32,14 +37,13 @@ public class Partida {
 		}
 		return jogadores;
 	}
-	
+
 	public boolean verificarFimDeJogo() {
 		for (Jogador jogador : jogadores) {
-			if(jogador.getPontuacaoAtual()>=10)
+			if (jogador.getPontuacaoAtual() >= 10)
 				return true;
 		}
 		return false;
-		
 	}
 
 	public Rodada getRodadaAtual() {

@@ -12,13 +12,21 @@ public class Jogador {
 		setNome(nome);
 		setPontuacao(pontuacao);
 		setBaralho();
-		this.id = id;
+		setId(id);
 	}
 
 	public Jogador(String nome, Baralho baralho) {
 		setNome(nome);
 		setBaralho(baralho);
 		setPontuacao(new ArrayList<Integer>());
+	}
+	
+	public void efetuarJogada(Jogador jogador, Carta carta, String dica, Rodada rodada) {
+		rodada.addJogada(new Jogada(jogador,carta,dica));
+	}
+	
+	public void efetuarJogada(Jogador jogador, Carta carta, Rodada rodada) {
+		rodada.addJogada(new Jogada(jogador,carta));
 	}
 
 	public String getNome() {
