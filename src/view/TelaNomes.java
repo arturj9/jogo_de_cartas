@@ -25,6 +25,11 @@ public class TelaNomes extends JFrame{
 		
 		
 		JPanel j1 = new JPanel();
+		//teste
+		if(true) {}
+		
+		
+		
 		j1.setLayout(new GridLayout(4,2,20,10));
 		JTextField p1 = new JTextField(); 
 		p1.setBounds(80, 90, 150, 20);
