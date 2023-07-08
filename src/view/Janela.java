@@ -94,6 +94,7 @@ public class Janela extends JFrame {
 		botaoJogar.setFont(new Font("Arial", Font.BOLD, 15));
 		botaoJogar.setPreferredSize(new Dimension(100, 100));
 		botaoJogar.setIcon(iconeJogar);
+		botaoJogar.addActionListener(new newGame(this));
 		painelAux.add(botaoJogar);
 		
 		painelAux.add(espacoVazio());
@@ -149,7 +150,16 @@ public class Janela extends JFrame {
 		
         return novoIcone;
 	}
-	
+	private class newGame implements ActionListener{
+		private Janela j;
+		private newGame(Janela j){
+			this.j = j;
+		}
+		public void actionPerformed(ActionEvent e) {
+			TelaNomes tn = new TelaNomes();
+			j.dispose();
+		}
+	}
 	private class acaoComoJogar implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
@@ -179,5 +189,4 @@ public class Janela extends JFrame {
 			System.exit(0);
 		}
 	}
-
 }

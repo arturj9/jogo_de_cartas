@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
@@ -21,16 +22,37 @@ public class TelaCartas extends JPanel{
 		this.setLayout(new BorderLayout());
 		jp = new JPanel();
 		jp.setLayout(new GridLayout(2,6,50,50));
+//		jp.setBackground(new Color(163, 26, 201));
 		painelCartas = new JButton[6];
 		fazerTelaCartas();
+		JPanel pvez= new JPanel();
+		pvez.setLayout(new GridLayout(2,1,20,20));
+		JPanel temp0 = new JPanel();
+		
+		pvez.setBackground(new Color(163, 26, 201));
+		pvez.setBorder(new LineBorder(Color.BLACK));
 		JLabel vez = new JLabel();
-		vez.setBorder(new LineBorder(Color.black));
-		vez.setText("----------------------------------------------------------------------------VEZ DO JOGADOR #:----------------------------------------------------------------");
-
+		vez.setText("------------------------------------------------------- VEZ DO JOGADOR # ---------------------------------------------------");
+		vez.setFont(new Font("",Font.BOLD,14));
+		vez.setForeground(Color.white);
+		
+		JPanel sul = new JPanel();
+		JPanel temp = new JPanel();
+		temp.setOpaque(false);
+		
+		sul.setLayout(new GridLayout(3,1,20,20));
+		JButton l1 = new JButton();
+		l1.setText("Escolha sua Carta");
 		JTextField resposta = new JTextField();
-		this.add(resposta,BorderLayout.SOUTH);
-		this.add(vez,BorderLayout.NORTH);
+		
+		sul.add(temp);
+		sul.add(resposta);
+		sul.add(l1);
+		pvez.add(vez);
+		pvez.add(temp0);
+		this.add(pvez,BorderLayout.NORTH);
 		this.add(jp,BorderLayout.CENTER);
+		this.add(sul,BorderLayout.SOUTH);
 		
 	}
 	public void fazerTelaCartas() {
@@ -39,8 +61,8 @@ public class TelaCartas extends JPanel{
 			painelCartas[i].setSize(10,10);
 			jp.add(painelCartas[i]);
 		}
-		//ImageIcon imagem = new ImageIcon(getClass().getResource("img\\robo.jpeg"));
-		painelCartas[0].setBackground(Color.black);
+		
+		painelCartas[0].setIcon(new ImageIcon("img/robo.jpeg"));
 		painelCartas[1].setBackground(Color.blue);
 		painelCartas[2].setBackground(Color.cyan);
 		painelCartas[3].setBackground(Color.darkGray);
