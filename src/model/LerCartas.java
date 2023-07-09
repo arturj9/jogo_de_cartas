@@ -26,7 +26,7 @@ public class LerCartas {
 
 			while (leitura.ready()) {
 				
-				cartas.add(new Carta(diretorioCartas+leitura.readLine()));
+				cartas.add(new Carta(diretorioCartas,leitura.readLine()));
 			}
 
 		} catch (IOException e) {
