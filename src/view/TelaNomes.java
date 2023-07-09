@@ -2,7 +2,11 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,86 +22,160 @@ import javax.swing.border.LineBorder;
 
 
 public class TelaNomes extends JFrame{
-	private JTextField p1;
-	private JTextField p2;
-	private JTextField p3;
-	private JTextField p4;
+	
+	private static final long serialVersionUID = 1L;
+	private JFrame Janela;
+	private JTextField nomeJog1;
+	private JTextField nomeJog2;
+	private JTextField nomeJog3;
+	private JTextField nomeJog4;
+	
 	public TelaNomes() {
+		Janela = this;
+	}
+	
+	public void iniciar() {
+		
 		this.setLayout(new BorderLayout());
-		this.setTitle("Jogo de Cartas");
-		this.setSize(500,500);
+		this.setTitle("Dixit");
+		this.setSize(700, 700);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
-		JPanel plabel = new JPanel();
-		plabel.setBackground(new Color(163, 26, 201));
-		JLabel l1 = new JLabel("---------------------------------Nome Dos Jogadores:---------------------------------");
-		l1.setFont(new Font("",Font.BOLD,14));
-		l1.setForeground(Color.WHITE);
-		l1.setBorder(new LineBorder(Color.black));
-		plabel.add(l1);
-		this.add(plabel,BorderLayout.NORTH);
 		
+		JPanel painelNorte = configurarCor();
 		
-		JPanel j1 = new JPanel();
-		//teste
-		j1.setLayout(new GridLayout(4,2,20,10));
-		p1 = new JTextField(); 
-		p1.setBounds(80, 90, 150, 20);
-		p2 = new JTextField(); 
-		p2.setBounds(80, 130, 100, 20);
-		p3 = new JTextField(); 
-		p3.setBounds(80, 170, 100, 20);
-		p4 = new JTextField();
-		p4.setBounds(80, 210, 100, 20);
-		j1.setBackground(new Color(163, 26, 201));
+		JLabel lableAux = new JLabel("Nome Dos Jogadores:");
+		lableAux.setFont(new Font("",Font.BOLD,16));
+		lableAux.setForeground(Color.WHITE);
 		
-		JLabel pl1 = new JLabel("Jogador 1: "); 
-		pl1.setForeground(Color.white);
-		JLabel pl2 = new JLabel("Jogador 2: "); 
-		pl2.setForeground(Color.white);
-		JLabel pl3 = new JLabel("Jogador 3: "); 
-		pl3.setForeground(Color.white);
-		JLabel pl4 = new JLabel("Jogador 4: "); 
-		pl4.setForeground(Color.white);
-		j1.add(pl1);
-		j1.add(p1);
-		j1.add(pl2);
-		j1.add(p2);
-		j1.add(pl3);
-		j1.add(p3);
-		j1.add(pl4);
-		j1.add(p4);
+		painelNorte.add(lableAux);
+		this.add(painelNorte,BorderLayout.NORTH);
 		
-		this.add(j1,BorderLayout.CENTER);
+		JPanel painelCentro = configurarPainelCentro();
 		
-		JPanel pj = new JPanel();
-		pj.setBorder(new LineBorder(Color.black));
-		pj.setBackground(new Color(163, 26, 201));
-		JButton jogar = new JButton("JOGAR");
-		jogar.addActionListener(new newGame(this));
-		pj.add(jogar);
-		this.add(pj,BorderLayout.SOUTH);
+		this.add(painelCentro,BorderLayout.CENTER);
 		this.setVisible(true);
 	}
-	private class newGame implements ActionListener {
-		private JFrame jf;
-		private newGame(JFrame jf) {
-			this.jf = jf;
-		}
+	
+	private JPanel configurarCor() {
+		
+		JPanel painelAux = new JPanel() {
+			
+            private static final long serialVersionUID = 1L;
+
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+
+                Color cor1 = Color.RED;
+                Color cor2 = Color.BLUE;
+                int x1 = 0;
+                int y1 = 0;
+                int x2 = getWidth();
+                int y2 = getHeight();
+
+                GradientPaint gradient = new GradientPaint(x1, y1, cor1, x2, y2, cor2);
+
+                g2d.setPaint(gradient);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
+        
+        return painelAux;
+	}
+	
+	private JPanel configurarPainelCentro() {
+		
+		JPanel painelNovo = configurarCor();
+		
+		JPanel Aux = new JPanel();
+		Aux.setOpaque(false);
+		
+		JButton Botao = new JButton("Começar");
+		Botao.setBackground(Color.white);
+		Botao.setFont(new Font("",Font.BOLD,16));
+		Botao.addActionListener(new acaoComecar());
+		
+		JLabel jogador1 = new JLabel("Jogador 1: ");
+		jogador1.setForeground(Color.white);
+		jogador1.setOpaque(false);
+		jogador1.setFont(new Font("",Font.BOLD,16));
+		JLabel jogador2 = new JLabel("Jogador 2: ");
+		jogador2.setForeground(Color.white);
+		jogador2.setOpaque(false);
+		jogador2.setFont(new Font("",Font.BOLD,16));
+		JLabel jogador3 = new JLabel("Jogador 3: ");
+		jogador3.setForeground(Color.white);
+		jogador3.setOpaque(false);
+		jogador3.setFont(new Font("",Font.BOLD,16));
+		JLabel jogador4 = new JLabel("Jogador 4: ");
+		jogador4.setForeground(Color.white);
+		jogador4.setOpaque(false);
+		jogador4.setFont(new Font("",Font.BOLD,16));
+		
+		nomeJog1 = new JTextField();
+		
+		Font fonte = nomeJog1.getFont();
+        float novoTamanho = fonte.getSize() + 10;
+        
+        nomeJog1.setFont(fonte.deriveFont(novoTamanho));
+		nomeJog2 = new JTextField();
+		nomeJog2.setFont(fonte.deriveFont(novoTamanho));
+		nomeJog3 = new JTextField();
+		nomeJog3.setFont(fonte.deriveFont(novoTamanho));
+		nomeJog4 = new JTextField();
+		nomeJog4.setFont(fonte.deriveFont(novoTamanho));
+		
+		painelNovo.setLayout(new GridLayout(10,2));
+		
+		painelNovo.add(Aux);
+		painelNovo.add(Aux);
+		
+		painelNovo.add(jogador1);
+		painelNovo.add(nomeJog1);
+		
+		painelNovo.add(Aux);
+		painelNovo.add(Aux);
+		
+		painelNovo.add(jogador2);
+		painelNovo.add(nomeJog2);
+		
+		painelNovo.add(Aux);
+		painelNovo.add(Aux);
+		
+		painelNovo.add(jogador3);
+		painelNovo.add(nomeJog3);
+		
+		painelNovo.add(Aux);
+		painelNovo.add(Aux);
+		
+		painelNovo.add(jogador4);
+		painelNovo.add(nomeJog4);
+		
+		painelNovo.add(Aux);
+		painelNovo.add(Aux);
+		
+		painelNovo.add(Botao);
+		
+		return painelNovo;
+	}
+	
+	private class acaoComecar implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if(p1.getText().isEmpty() || p2.getText().isEmpty() || p3.getText().isEmpty()|| p4.getText().isEmpty())
-				JOptionPane.showMessageDialog(null,"Campos Imcompletos");
+			if(nomeJog1.getText().isEmpty() || nomeJog2.getText().isEmpty() || nomeJog3.getText().isEmpty()|| nomeJog4.getText().isEmpty())
+				JOptionPane.showMessageDialog(Janela,"Campos Incompletos!!", "Erro!", JOptionPane.ERROR_MESSAGE, null);	
 			else {
 				try {
-					String nomep1 = p1.getText();
-					String nomep2 = p2.getText();
-					String nomep3 = p3.getText();
-					String nomep4 = p4.getText();
+					String nomep1 = nomeJog1.getText();
+					String nomep2 = nomeJog2.getText();
+					String nomep3 = nomeJog3.getText();
+					String nomep4 = nomeJog4.getText();
 				}catch(Exception E) {
 				
 				}
 				TelaPrincipal tp = new TelaPrincipal();
-				jf.dispose();
+				Janela.dispose();
 			}
 		}
 			}

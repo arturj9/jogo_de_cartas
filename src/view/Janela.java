@@ -3,7 +3,6 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -33,12 +32,12 @@ public class Janela extends JFrame {
     private JButton botaoJogar, botaoComoJogar, botaoSair;
     private ImageIcon iconeJogar, iconeComoJogar, iconeSair;
 
-	public Janela(String titulo) {
+	public Janela() {
 		
 		Janela = this;
 		
-		this.setTitle(titulo);
-		this.setSize(800,800);
+		this.setTitle("Dixit");
+		this.setSize(700,700);
 		this.setLayout(new BorderLayout());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -94,7 +93,7 @@ public class Janela extends JFrame {
 		botaoJogar.setFont(new Font("Arial", Font.BOLD, 15));
 		botaoJogar.setPreferredSize(new Dimension(100, 100));
 		botaoJogar.setIcon(iconeJogar);
-		botaoJogar.addActionListener(new newGame(this));
+		botaoJogar.addActionListener(new acaoJogar());
 		painelAux.add(botaoJogar);
 		
 		painelAux.add(espacoVazio());
@@ -150,16 +149,16 @@ public class Janela extends JFrame {
 		
         return novoIcone;
 	}
-	private class newGame implements ActionListener{
-		private Janela j;
-		private newGame(Janela j){
-			this.j = j;
-		}
+	
+	private class acaoJogar implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			TelaNomes tn = new TelaNomes();
-			j.dispose();
+			
+			TelaNomes telaNomes = new TelaNomes();
+			telaNomes.iniciar();
+			Janela.dispose();
 		}
 	}
+	
 	private class acaoComoJogar implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
