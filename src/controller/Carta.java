@@ -4,9 +4,11 @@ import javax.swing.ImageIcon;
 
 public class Carta extends ImageIcon {
 	private boolean sorteada;
+	private String nome;
 
-	public Carta(String caminho) {
-		super(caminho);
+	public Carta(String pasta, String nome) {
+		super(pasta+nome);
+		setNome(nome);
 		setSorteada(false);
 	}
 	
@@ -27,5 +29,15 @@ public class Carta extends ImageIcon {
 	public void setSorteada(boolean sorteada) {
 		this.sorteada = sorteada;
 	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	
 
 }

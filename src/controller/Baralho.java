@@ -11,13 +11,14 @@ public class Baralho {
 	}
 
 	public Carta sortearCarta() {
-		int min = 0;
-		int max = cartas.size();
-		Random random = new Random();
-		Carta c = cartas.get(random.nextInt((max - min + 1)));
-		if (c.isSorteada())
-			return sortearCarta();
-		return c;
+//		int min = 0;
+//		int max = cartas.size();
+//		Random random = new Random();
+//		Carta c = cartas.get(random.nextInt((max - min + 1)));
+//		if (c.isSorteada())
+//			return sortearCarta();
+//		return c;
+		return cartas.get(0);
 	}
 
 	public int quantCartas() {
@@ -28,6 +29,7 @@ public class Baralho {
 		ArrayList<Carta> cartas = new ArrayList<Carta>(quant);
 		for (int i = 0; i < quant; i++) {
 			Carta c = sortearCarta();
+			cartas.add(c);
 			c.setSorteada(true);
 		}
 		return new Baralho(cartas);

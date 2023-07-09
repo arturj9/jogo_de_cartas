@@ -1,32 +1,31 @@
 package controller;
 
-import java.util.ArrayList;
-
 public class Jogador {
 	private int id;
 	private String nome;
 	private Baralho baralho;
-	private ArrayList<Integer> pontuacao;
+	private int pontuacao;
 
-	public Jogador(int id, String nome, ArrayList<Integer> pontuacao) {
+	public Jogador(int id, String nome) {
 		setNome(nome);
-		setPontuacao(pontuacao);
+		setPontuacao(0);
 		setBaralho();
 		setId(id);
 	}
 
-	public Jogador(String nome, Baralho baralho) {
+	public Jogador(int id, String nome, Baralho baralho, int pontuacao) {
+		setId(id);
 		setNome(nome);
 		setBaralho(baralho);
-		setPontuacao(new ArrayList<Integer>());
+		setPontuacao(pontuacao);
 	}
-	
-	public void efetuarJogada(Jogador jogador, Carta carta, String dica, Rodada rodada) {
-		rodada.addJogada(new Jogada(jogador,carta,dica));
+
+	public void efetuarJogada(Carta carta, String dica, Rodada rodada) {
+		rodada.addJogada(new Jogada(this, carta, dica));
 	}
-	
-	public void efetuarJogada(Jogador jogador, Carta carta, Rodada rodada) {
-		rodada.addJogada(new Jogada(jogador,carta));
+
+	public void efetuarJogada(Carta carta, Rodada rodada) {
+		rodada.addJogada(new Jogada(this, carta));
 	}
 
 	public String getNome() {
@@ -42,8 +41,7 @@ public class Jogador {
 	}
 
 	public void setBaralho(Baralho baralho) {
-		if (baralho.getCartas().size() == 6)
-			this.baralho = baralho;
+		this.baralho = baralho;
 	}
 
 	public void setBaralho() {
@@ -51,18 +49,15 @@ public class Jogador {
 	}
 
 	public void addPontuacao(int pontuacao) {
-		this.pontuacao.add(pontuacao);
+		setPontuacao(getPontuacao()+pontuacao);
 	}
 
-	public ArrayList<Integer> getPontuacao() {
+	public int getPontuacao() {
 		return pontuacao;
 	}
-	
-	public Integer getPontuacaoAtual(){
-		return pontuacao.get(pontuacao.size()-1);
-	}
 
-	public void setPontuacao(ArrayList<Integer> pontuacao) {
+
+	public void setPontuacao(int pontuacao) {
 		this.pontuacao = pontuacao;
 	}
 
@@ -73,6 +68,5 @@ public class Jogador {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
 
 }

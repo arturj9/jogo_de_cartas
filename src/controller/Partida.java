@@ -29,10 +29,10 @@ public class Partida {
 		return jogadores.get(jogadores.indexOf(jogadorDaVez) + 1);
 	}
 
-	public ArrayList<Jogador> getJogadoresComuns(Jogador proximoJogadorDaVez) {
+	public ArrayList<Jogador> getJogadoresComuns(Jogador jogadorDaVez) {
 		ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
-		for (Jogador jogador : jogadores) {
-			if (jogador != proximoJogadorDaVez)
+		for (Jogador jogador : this.jogadores) {
+			if (jogador != jogadorDaVez)
 				jogadores.add(jogador);
 		}
 		return jogadores;
@@ -40,7 +40,7 @@ public class Partida {
 
 	public boolean verificarFimDeJogo() {
 		for (Jogador jogador : jogadores) {
-			if (jogador.getPontuacaoAtual() >= 10)
+			if (jogador.getPontuacao() >= 10)
 				return true;
 		}
 		return false;
