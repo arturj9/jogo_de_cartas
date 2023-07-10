@@ -232,7 +232,9 @@ public class TelaJogadorComum extends JFrame {
 			if (partida.verificaProximaRodada()) {
 				if (partida.proximaRodada()) {
 					JOptionPane.showMessageDialog(Janela, "Fim", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE, null);
+					Janela.dispose();
 				} else {
+					Janela.dispose();
 					JOptionPane.showMessageDialog(Janela,
 							"Vez de " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
 							"VEZ DE " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
@@ -240,13 +242,13 @@ public class TelaJogadorComum extends JFrame {
 					TelaJogadorVez tp = new TelaJogadorVez(partida);
 				}
 			} else {
+				Janela.dispose();
 				JOptionPane.showMessageDialog(Janela,
 						"Vez de " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
 						"VEZ DE " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
 						JOptionPane.INFORMATION_MESSAGE, null);
 				new TelaJogadorComum(partida, partida.getRodadaAtual().getJogadaJogadorDaVez().getDica());
 			}
-			Janela.dispose();
 		}
 	}
 

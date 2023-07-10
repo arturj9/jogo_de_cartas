@@ -69,15 +69,6 @@ public class Rodada implements Pontuacao {
 			return true;
 		return false;
 	}
-
-	public Baralho getBaralhoJogadasFinaisEmbaralhado() {
-		ArrayList<Carta> cartas = new ArrayList<Carta>();
-		for (Jogada jogada : jogadasFinais) {
-			cartas.add(jogada.getCarta());
-		}
-		Baralho baralho = new Baralho(cartas);
-		return baralho.getEmbaralhado();
-	}
 	
 	public Baralho getBaralhoJogadasIniciaisEmbaralhado() {
 		ArrayList<Carta> cartas = new ArrayList<Carta>();

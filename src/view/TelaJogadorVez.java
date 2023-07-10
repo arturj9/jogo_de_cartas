@@ -203,6 +203,11 @@ public class TelaJogadorVez extends JFrame {
 		painelCartas.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		painelCartas.setLayout(new GridLayout(2, 3, 10, 10));
 		painel.add(painelCartas, BorderLayout.CENTER);
+		
+		JOptionPane.showMessageDialog(Janela,
+				"Vez de " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
+				"VEZ DE " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
+				JOptionPane.INFORMATION_MESSAGE, null);
 
 		for (Carta carta : partida.getRodadaAtual().getJogadorDaJogada().getBaralho().getCartas()) {
 			BotaoCarta botaoCarta = new BotaoCarta("", carta, new Selecionar());
@@ -248,12 +253,12 @@ public class TelaJogadorVez extends JFrame {
 			try {
 				partida.getRodadaAtual().getJogadorDaJogada().efetuarJogada(botaoCartaSelecionado.getCarta(),
 						dica.getText(), partida.getRodadaAtual());
+				Janela.dispose();
 				JOptionPane.showMessageDialog(Janela,
 						"Vez de " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
 						"VEZ DE " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
 						JOptionPane.INFORMATION_MESSAGE, null);
 				new TelaJogadorComum(partida, dica.getText());
-				Janela.dispose();
 			} catch (Exception ep) {
 				JOptionPane.showMessageDialog(Janela, "Alerta", ep.getMessage(), JOptionPane.INFORMATION_MESSAGE, null);
 			}
