@@ -11,14 +11,23 @@ public class Baralho {
 	}
 
 	public Carta sortearCarta() {
-//		int min = 0;
-//		int max = cartas.size();
-//		Random random = new Random();
-//		Carta c = cartas.get(random.nextInt((max - min + 1)));
-//		if (c.isSorteada())
-//			return sortearCarta();
-//		return c;
-		return cartas.get(0);
+		int min = 0;
+		int max = cartas.size() - 1;
+		Random random = new Random();
+		Carta c = cartas.get(random.nextInt((max - min + 1)));
+		if (c.isSorteada())
+			return sortearCarta();
+		return c;
+	}
+
+	public Carta sortearCarta(ArrayList<Carta> cartas) {
+		int min = 0;
+		int max = this.cartas.size() - 1;
+		Random random = new Random();
+		Carta c = this.cartas.get(random.nextInt((max - min + 1)));
+		if (cartas.contains(c))
+			return sortearCarta();
+		return c;
 	}
 
 	public int quantCartas() {
@@ -42,16 +51,12 @@ public class Baralho {
 	public void setCartas(ArrayList<Carta> cartas) {
 		this.cartas = cartas;
 	}
-	
+
 	public Baralho getEmbaralhado() {
-		int min = 0;
-		int max = cartas.size();
 		ArrayList<Carta> cartas = new ArrayList<Carta>();
-		while(cartas.size()<getCartas().size()) {
-			Random random = new Random();
-			Carta c = cartas.get(random.nextInt((max - min + 1)));
-			if(!cartas.contains(c))
-				cartas.add(c);
+		for (int i = 0; i < this.cartas.size(); i++) {
+			Carta c = sortearCarta(cartas);
+			cartas.add(c);
 		}
 		return new Baralho(cartas);
 	}

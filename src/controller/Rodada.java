@@ -64,14 +64,30 @@ public class Rodada implements Pontuacao {
 		return true;
 	}
 
+	public boolean verificaFaseInicial() {
+		if (jogadasIniciais.size() == getTodosJogadores().size())
+			return true;
+		return false;
+	}
+
 	public Baralho getBaralhoJogadasFinaisEmbaralhado() {
 		ArrayList<Carta> cartas = new ArrayList<Carta>();
 		for (Jogada jogada : jogadasFinais) {
 			cartas.add(jogada.getCarta());
 		}
-
-		return new Baralho(cartas).getEmbaralhado();
+		return new Baralho(cartas);
+//		return baralho.getEmbaralhado();
 	}
+	
+	public Baralho getBaralhoJogadasIniciaisEmbaralhado() {
+		ArrayList<Carta> cartas = new ArrayList<Carta>();
+		for (Jogada jogada : jogadasIniciais) {
+			cartas.add(jogada.getCarta());
+		}
+
+		return new Baralho(cartas);
+	}
+
 
 	public Jogador getJogadorById(IDJogador id) {
 		for (Jogador jogador : getTodosJogadores()) {

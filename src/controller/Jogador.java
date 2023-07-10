@@ -45,7 +45,7 @@ public class Jogador {
 	}
 
 	public void setBaralho() {
-		setBaralho(new BaralhoJogo().getCartas(6));
+		setBaralho(BaralhoJogo.getInstacia().getCartas(6));
 	}
 
 	public void addPontuacao(int pontuacao) {

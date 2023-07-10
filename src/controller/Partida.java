@@ -16,10 +16,24 @@ public class Partida {
 		rodadas.add(new Rodada(jogadorDaVez, getJogadoresComuns(jogadorDaVez)));
 	}
 
-	public void proximaRodada() {
+	public boolean proximaRodada() {
+		getRodadaAtual().calcularPontuacao();
 		new RodadasDAO().inserir(getRodadaAtual());
-		Jogador proximoJogadorDaVez = getProximoJogadorDaVez();
-		rodadas.add(new Rodada(proximoJogadorDaVez, getJogadoresComuns(proximoJogadorDaVez)));
+		if(verificarFimDeJogo()) {
+			return true;
+		}else {
+			Jogador proximoJogadorDaVez = getProximoJogadorDaVez();
+			rodadas.add(new Rodada(proximoJogadorDaVez, getJogadoresComuns(proximoJogadorDaVez)));
+			return false;
+		}
+
+	}
+	
+
+	public boolean verificaProximaRodada() {
+		if (getRodadaAtual().getJogadorDaJogada() == null)
+			return true;
+		return false;
 	}
 
 	public Jogador getProximoJogadorDaVez() {
@@ -45,11 +59,11 @@ public class Partida {
 		}
 		return false;
 	}
-	
+
 	public String getNomeJogador(int indice) {
 		return jogadores.get(indice).getNome();
 	}
-	
+
 	public int getPontosJogador(int indice) {
 		return jogadores.get(indice).getPontuacao();
 	}
