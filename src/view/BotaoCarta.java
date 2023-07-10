@@ -8,6 +8,7 @@ import controller.Carta;
 
 public class BotaoCarta extends JButton {
 	
+	private static final long serialVersionUID = 1L;
 	private Carta carta;
 	
 	BotaoCarta(String text, Carta carta, ActionListener evento){

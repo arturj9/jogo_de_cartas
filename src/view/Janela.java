@@ -20,9 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import controller.BaralhoJogo;
-import controller.Carta;
-
 public class Janela extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -149,10 +146,6 @@ public class Janela extends JFrame {
 			telaNomes.iniciar();
 			janela.dispose();
 		}
-		
-		public Janela getJanela() {
-			return janela;
-		}
 
 		public void setJanela(Janela janela) {
 			this.janela = janela;
@@ -169,7 +162,7 @@ public class Janela extends JFrame {
 					+ "Cada um dos outros jogadores deverá então olhar as cartas que possui na mão e eleger uma delas para combinar com a dica do jogador\n"
 					+ "da vez para poder enganar os outros, fazendo pensar que a sua carta é a escolhida da rodada.\n\n"
 					+ "Após todos os jogadores escolherem uma carta da mão, todos os jogadores, exceto o jogador da rodada, escolherá a carta que acha que\n"
-					+ "é do jogador da vez, não podendo escolher a sua própria.\n\n"
+					+ "é do jogador da vez, não fazendo sentido escolher a sua própria carta.\n\n"
 					+ "SISTEMA DE PONTOS:\n\n"
 					+ "Caso todos os outros jogadores escolherem a carta do jogador da vez, ele não receberá nenhum ponto e os demais ogadores ganham 2 ponto.\n"
 					+ "Se o jogador da vez der uma dica muito difícil e nenhum dos outros jogadores acertar, ele também não ganha nenhum ponto os demais\n"

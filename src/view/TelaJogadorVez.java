@@ -2,53 +2,46 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 
 import controller.Carta;
-import controller.IDJogador;
 import controller.Jogador;
 import controller.Partida;
+import controller.Rodada;
 
 public class TelaJogadorVez extends JFrame {
 
-	private JFrame Janela;
+	private static final long serialVersionUID = 1L;
+	private JFrame janela;
 	private Partida partida;
+	private Rodada rodada;
 	private JTextField dica;
-	private JPanel[] telaCartas;
-	private JPanel telaAdivinhar;
-	private JPanel ti;
-	private int idCarta;
-	private ArrayList<Integer> ids;
-	private int contRodadas;
+	private ArrayList<JButton> botoesCartas;
 
 	private BotaoCarta botaoCartaSelecionado;
 
 	public TelaJogadorVez(Partida p) {
 
-		Janela = this;
+		janela = this;
 		partida = p;
+		rodada = partida.getRodadaAtual();
+		botoesCartas = new ArrayList<JButton>();
 
 		this.setLayout(new BorderLayout());
 		this.setTitle("Dixit");
@@ -65,33 +58,6 @@ public class TelaJogadorVez extends JFrame {
 		this.add(painelNorte, BorderLayout.NORTH);
 		this.add(painelCentro, BorderLayout.CENTER);
 		this.add(painelSul, BorderLayout.SOUTH);
-
-////		contRodadas = 0;
-////		idCarta = -1;
-////		ids = new ArrayList<Integer>();
-//		
-//		telaCartas = new JPanel[4];
-//		this.setSize(700,700);
-//		this.setLayout(new BorderLayout());
-//		this.setLocationRelativeTo(null);
-//		telaCartas[0] = new TelaCartas(this);
-//		telaCartas[1] = new TelaCartas(this);
-//		telaCartas[2] = new TelaCartas(this);
-//		telaCartas[3] = new TelaCartas(this);
-//		
-//		JPanel cartas = new JPanel();
-//		cartas.setBorder(new LineBorder(Color.black));
-//		JPanel cartas1 = new JPanel();
-////		cartas1.add(l1);
-//		this.add(cartas1,BorderLayout.SOUTH);
-////		this.add(telaCartas[0],BorderLayout.CENTER);
-////		this.add(telaCartas[1],BorderLayout.CENTER);
-////		this.add(telaCartas[2],BorderLayout.CENTER);
-////		this.add(telaCartas[3],BorderLayout.CENTER);
-////		
-//		visibilidadeCartas(2);
-//	
-////		
 		this.setVisible(true);
 	}
 
@@ -153,6 +119,7 @@ public class TelaJogadorVez extends JFrame {
 
 		JPanel painel = configurarCor();
 		painel.setLayout(new GridLayout(1, 4));
+		ArrayList<Jogador> listaJogadores = rodada.getTodosJogadores();
 
 		for (int i = 0; i < 4; i++) {
 			JLabel jogador = new JLabel("<html>" + partida.getNomeJogador(i) + "<br>" + partida.getPontosJogador(i)
@@ -162,9 +129,9 @@ public class TelaJogadorVez extends JFrame {
 
 			jogador.setHorizontalAlignment(JLabel.CENTER);
 
-			if (i == 0) {
-				jogador.setBackground(Color.white);
+			if (listaJogadores.get(i) == rodada.getJogadorDaJogada()) {
 				JPanel p = configurarCorVerde();
+				p.setBorder(new LineBorder(Color.black));
 				p.add(jogador);
 				painel.add(p);
 			} else {
@@ -185,7 +152,7 @@ public class TelaJogadorVez extends JFrame {
 		JPanel painelNorte = configurarCor();
 		painelNorte.setLayout(new GridLayout(2, 1));
 
-		JLabel texto = new JLabel("<html>Vez do Jogador 1 (JOGADOR DA VEZ)<html>");
+		JLabel texto = new JLabel("<html>Vez do/a " + rodada.getJogadorDaVez().getNome() + "<html>");
 		texto.setFont(new Font("", Font.BOLD, 16));
 		texto.setForeground(Color.WHITE);
 		texto.setHorizontalAlignment(JLabel.CENTER);
@@ -203,14 +170,15 @@ public class TelaJogadorVez extends JFrame {
 		painelCartas.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		painelCartas.setLayout(new GridLayout(2, 3, 10, 10));
 		painel.add(painelCartas, BorderLayout.CENTER);
-		
-		JOptionPane.showMessageDialog(Janela,
-				"Vez de " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
-				"VEZ DE " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
-				JOptionPane.INFORMATION_MESSAGE, null);
+
+		JOptionPane.showMessageDialog(janela, "Vez de " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
+				"VEZ DE " + partida.getRodadaAtual().getJogadorDaJogada().getNome(), JOptionPane.INFORMATION_MESSAGE,
+				null);
 
 		for (Carta carta : partida.getRodadaAtual().getJogadorDaJogada().getBaralho().getCartas()) {
 			BotaoCarta botaoCarta = new BotaoCarta("", carta, new Selecionar());
+			botaoCarta.setIcon(botaoCarta.getCarta().getIcon(250, 250));
+			botoesCartas.add(botaoCarta);
 			painelCartas.add(botaoCarta);
 		}
 
@@ -250,17 +218,26 @@ public class TelaJogadorVez extends JFrame {
 	private class Avancar implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			try {
-				partida.getRodadaAtual().getJogadorDaJogada().efetuarJogada(botaoCartaSelecionado.getCarta(),
-						dica.getText(), partida.getRodadaAtual());
-				Janela.dispose();
-				JOptionPane.showMessageDialog(Janela,
-						"Vez de " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
-						"VEZ DE " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
-						JOptionPane.INFORMATION_MESSAGE, null);
-				new TelaJogadorComum(partida, dica.getText());
-			} catch (Exception ep) {
-				JOptionPane.showMessageDialog(Janela, "Alerta", ep.getMessage(), JOptionPane.INFORMATION_MESSAGE, null);
+			String aux = dica.getText().trim();
+			if (aux.isEmpty()) {
+				JOptionPane.showMessageDialog(janela, "Escreva a DICA antes de apertar no botão 'PRONTO'!", "Erro!",
+						JOptionPane.ERROR_MESSAGE, null);
+			} else {
+				try {
+					janela.dispose();
+
+					partida.getRodadaAtual().getJogadorDaJogada().efetuarJogada(botaoCartaSelecionado.getCarta(),
+							dica.getText(), partida.getRodadaAtual());
+					JOptionPane.showMessageDialog(janela,
+							"Vez de " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
+							"VEZ DE " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
+							JOptionPane.INFORMATION_MESSAGE, null);
+					new TelaJogadorComum(partida, dica.getText(), 1);
+					janela.dispose();
+				} catch (Exception ep) {
+					JOptionPane.showMessageDialog(janela, "Alerta", ep.getMessage(), JOptionPane.INFORMATION_MESSAGE,
+							null);
+				}
 			}
 		}
 	}
@@ -268,6 +245,16 @@ public class TelaJogadorVez extends JFrame {
 	private class Selecionar implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			BotaoCarta botaoCarta = (BotaoCarta) e.getSource();
+			int indiceBotao = botoesCartas.indexOf(botaoCarta);
+
+			for (int i = 0; i < botoesCartas.size(); i++) {
+				if (i == indiceBotao) {
+					botoesCartas.get(i).setBorder(new LineBorder(Color.black, 5));
+				} else {
+					botoesCartas.get(i).setBorder(null);
+				}
+			}
+
 			setBotaoCartaSelecionado(botaoCarta);
 		}
 	}
@@ -279,40 +266,4 @@ public class TelaJogadorVez extends JFrame {
 	public void setBotaoCartaSelecionado(BotaoCarta botaoCartaSelecionado) {
 		this.botaoCartaSelecionado = botaoCartaSelecionado;
 	}
-
-//	public void visibilidadeCartas(int i) {
-//		for(int j = 0;j<4;j++) {
-//			if(j == i)
-//				this.add(telaCartas[j],BorderLayout.CENTER);
-//		}
-//	}
-
-//	public void rodarTelaInicial() {
-//		
-//	}
-//
-//	public void EscolherCartaAdivinhar(int id) {
-//		if(idCarta < 0) {
-//			idCarta = id;
-//		}else {
-//			ids.add(id);
-//		}
-//			contRodadas++;
-//			
-//			if(contRodadas>=4)
-//			CompararCartas();
-//	}
-//	
-//	public void CompararCartas() {
-//		int cartasiguais = 0;
-//		for (Integer integer : ids) {
-//			if(this.idCarta == integer) {
-//				cartasiguais++;
-//			}
-//		}
-//		System.out.println("Foram encontradas: "+cartasiguais+" cartas iguais");
-//		ids.removeAll(ids);
-//		contRodadas = 0;
-//		idCarta = -1;
-//	}
 }
