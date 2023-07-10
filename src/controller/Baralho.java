@@ -26,7 +26,7 @@ public class Baralho {
 		Random random = new Random();
 		Carta c = this.cartas.get(random.nextInt((max - min + 1)));
 		if (cartas.contains(c))
-			return sortearCarta();
+			return sortearCarta(cartas);
 		return c;
 	}
 

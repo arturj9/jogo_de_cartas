@@ -2,7 +2,7 @@ package controller;
 
 import model.LerCartas;
 
-public class BaralhoJogo extends Baralho {
+public final class BaralhoJogo extends Baralho {
 	
 	private static BaralhoJogo baralhoJogo;
 

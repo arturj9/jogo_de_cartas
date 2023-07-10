@@ -75,8 +75,8 @@ public class Rodada implements Pontuacao {
 		for (Jogada jogada : jogadasFinais) {
 			cartas.add(jogada.getCarta());
 		}
-		return new Baralho(cartas);
-//		return baralho.getEmbaralhado();
+		Baralho baralho = new Baralho(cartas);
+		return baralho.getEmbaralhado();
 	}
 	
 	public Baralho getBaralhoJogadasIniciaisEmbaralhado() {
@@ -85,13 +85,14 @@ public class Rodada implements Pontuacao {
 			cartas.add(jogada.getCarta());
 		}
 
-		return new Baralho(cartas);
+		Baralho baralho = new Baralho(cartas);
+		return baralho.getEmbaralhado();
 	}
 
 
 	public Jogador getJogadorById(IDJogador id) {
 		for (Jogador jogador : getTodosJogadores()) {
-			if (jogador.getId() == id.getId())
+			if (jogador.getId() == id)
 				return jogador;
 		}
 		return null;
@@ -102,10 +103,10 @@ public class Rodada implements Pontuacao {
 	}
 
 	public Jogada getJogadaFinalByJogadorId(IDJogador id) {
-		if (jogadorDaVez.getId() == id.getId())
+		if (jogadorDaVez.getId() == id)
 			return getJogadaJogadorDaVez();
 		for (Jogada jogada : jogadasFinais) {
-			if (jogada.getJogador().getId() == id.getId())
+			if (jogada.getJogador().getId() == id)
 				return jogada;
 		}
 		return null;

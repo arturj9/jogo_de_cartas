@@ -1,19 +1,20 @@
 package controller;
 
 public class Jogador {
-	private int id;
+
+	private IDJogador id;
 	private String nome;
 	private Baralho baralho;
 	private int pontuacao;
 
-	public Jogador(int id, String nome) {
+	public Jogador(IDJogador id, String nome) {
 		setNome(nome);
 		setPontuacao(0);
 		setBaralho();
 		setId(id);
 	}
 
-	public Jogador(int id, String nome, Baralho baralho, int pontuacao) {
+	public Jogador(IDJogador id, String nome, Baralho baralho, int pontuacao) {
 		setId(id);
 		setNome(nome);
 		setBaralho(baralho);
@@ -49,23 +50,22 @@ public class Jogador {
 	}
 
 	public void addPontuacao(int pontuacao) {
-		setPontuacao(getPontuacao()+pontuacao);
+		setPontuacao(getPontuacao() + pontuacao);
 	}
 
 	public int getPontuacao() {
 		return pontuacao;
 	}
 
-
 	public void setPontuacao(int pontuacao) {
 		this.pontuacao = pontuacao;
 	}
 
-	public int getId() {
+	public IDJogador getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(IDJogador id) {
 		this.id = id;
 	}
 
