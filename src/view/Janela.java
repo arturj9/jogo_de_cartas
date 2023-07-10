@@ -34,8 +34,6 @@ public class Janela extends JFrame {
 
 	public Janela() {
 		
-		Janela = this;
-		
 		this.setTitle("Dixit");
 		this.setSize(700,700);
 		this.setLayout(new BorderLayout());
@@ -93,7 +91,7 @@ public class Janela extends JFrame {
 		botaoJogar.setFont(new Font("Arial", Font.BOLD, 15));
 		botaoJogar.setPreferredSize(new Dimension(100, 100));
 		botaoJogar.setIcon(iconeJogar);
-		botaoJogar.addActionListener(new acaoJogar());
+		botaoJogar.addActionListener(new acaoJogar(this));
 		painelAux.add(botaoJogar);
 		
 		painelAux.add(espacoVazio());
@@ -119,19 +117,6 @@ public class Janela extends JFrame {
         return painelAux;
 	}
 	
-	public void configurarPaineis() {
-		BaralhoJogo b = new BaralhoJogo();
-		Carta c = b.getCartas().get(1);
-		JPanel j = new JPanel();
-		j.setLayout(new GridLayout(2,3));
-		this.add(j, BorderLayout.CENTER);
-		for (int i=0;i<6;i++) {
-			JLabel bu = new JLabel();
-			bu.setIcon(c.getIcon());
-			j.add(bu);
-		}
-	}
-	
 	private JPanel espacoVazio() {
 		
 		JPanel painel = new JPanel();
@@ -151,11 +136,26 @@ public class Janela extends JFrame {
 	}
 	
 	private class acaoJogar implements ActionListener{
+		
+		private Janela janela;
+
+		public acaoJogar(Janela janela) {
+			setJanela(janela);
+		}
+		
 		public void actionPerformed(ActionEvent e) {
 			
 			TelaNomes telaNomes = new TelaNomes();
 			telaNomes.iniciar();
-			Janela.dispose();
+			janela.dispose();
+		}
+		
+		public Janela getJanela() {
+			return janela;
+		}
+
+		public void setJanela(Janela janela) {
+			this.janela = janela;
 		}
 	}
 	

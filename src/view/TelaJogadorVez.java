@@ -26,12 +26,13 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 
+import controller.Carta;
 import controller.IDJogador;
 import controller.Jogador;
 import controller.Partida;
 
 public class TelaJogadorVez extends JFrame {
-	
+
 	private JFrame Janela;
 	private Partida partida;
 	private JTextField dica;
@@ -41,28 +42,30 @@ public class TelaJogadorVez extends JFrame {
 	private int idCarta;
 	private ArrayList<Integer> ids;
 	private int contRodadas;
-	
+
+	private BotaoCarta botaoCartaSelecionado;
+
 	public TelaJogadorVez(Partida p) {
-		
+
 		Janela = this;
 		partida = p;
-		
+
 		this.setLayout(new BorderLayout());
 		this.setTitle("Dixit");
 		this.setSize(700, 700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
-		
+
 		JPanel painelNorte = configurarPainelNorte();
 		JPanel painelCentro = configurarPainelCentro();
 		JPanel painelSul = configurarCor();
 		painelSul.add(botaoPronto());
-		
+
 		this.add(painelNorte, BorderLayout.NORTH);
 		this.add(painelCentro, BorderLayout.CENTER);
 		this.add(painelSul, BorderLayout.SOUTH);
-		
+
 ////		contRodadas = 0;
 ////		idCarta = -1;
 ////		ids = new ArrayList<Integer>();
@@ -91,175 +94,194 @@ public class TelaJogadorVez extends JFrame {
 ////		
 		this.setVisible(true);
 	}
-	
+
 	private JPanel configurarCor() {
-		
+
 		JPanel painelAux = new JPanel() {
-			
-            private static final long serialVersionUID = 1L;
 
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g;
+			private static final long serialVersionUID = 1L;
 
-                Color cor1 = Color.RED;
-                Color cor2 = Color.BLUE;
-                int x1 = 0;
-                int y1 = 0;
-                int x2 = getWidth();
-                int y2 = getHeight();
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D) g;
 
-                GradientPaint gradient = new GradientPaint(x1, y1, cor1, x2, y2, cor2);
+				Color cor1 = Color.RED;
+				Color cor2 = Color.BLUE;
+				int x1 = 0;
+				int y1 = 0;
+				int x2 = getWidth();
+				int y2 = getHeight();
 
-                g2d.setPaint(gradient);
-                g2d.fillRect(0, 0, getWidth(), getHeight());
-            }
-        };
-        
-        return painelAux;
+				GradientPaint gradient = new GradientPaint(x1, y1, cor1, x2, y2, cor2);
+
+				g2d.setPaint(gradient);
+				g2d.fillRect(0, 0, getWidth(), getHeight());
+			}
+		};
+
+		return painelAux;
 	}
-	
+
 	private JPanel configurarCorVerde() {
-		
+
 		JPanel painelAux = new JPanel() {
-			
-            private static final long serialVersionUID = 1L;
 
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g;
+			private static final long serialVersionUID = 1L;
 
-                Color cor1 = Color.GREEN;
-                Color cor2 = Color.YELLOW;
-                int x1 = 0;
-                int y1 = 0;
-                int x2 = getWidth();
-                int y2 = getHeight();
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D) g;
 
-                GradientPaint gradient = new GradientPaint(x1, y1, cor1, x2, y2, cor2);
+				Color cor1 = Color.GREEN;
+				Color cor2 = Color.YELLOW;
+				int x1 = 0;
+				int y1 = 0;
+				int x2 = getWidth();
+				int y2 = getHeight();
 
-                g2d.setPaint(gradient);
-                g2d.fillRect(0, 0, getWidth(), getHeight());
-            }
-        };
-        
-        return painelAux;
+				GradientPaint gradient = new GradientPaint(x1, y1, cor1, x2, y2, cor2);
+
+				g2d.setPaint(gradient);
+				g2d.fillRect(0, 0, getWidth(), getHeight());
+			}
+		};
+
+		return painelAux;
 	}
-	
+
 	private JPanel configurarPainelNorte() {
-		
+
 		JPanel painel = configurarCor();
 		painel.setLayout(new GridLayout(1, 4));
-		
-        for (int i = 0; i < 4; i++) {
-    		JLabel jogador = new JLabel("<html>" + partida.getNomeJogador(i) + "<br>" + partida.getPontosJogador(i) + " "
-			+ "PONTOS</html>");
-    		jogador.setFont(new Font("",Font.BOLD,16));
-    		jogador.setForeground(Color.WHITE);
-    		
-    		jogador.setHorizontalAlignment(JLabel.CENTER);
-    		
-    		if(i == 0) {
-    			jogador.setBackground(Color.white);
-    			JPanel p = configurarCorVerde();
-    			p.add(jogador);
-    			painel.add(p);
-    		} else {
-    			jogador.setBorder(new LineBorder(Color.black));
-    			painel.add(jogador);
-    		}
-        }
-		
+
+		for (int i = 0; i < 4; i++) {
+			JLabel jogador = new JLabel("<html>" + partida.getNomeJogador(i) + "<br>" + partida.getPontosJogador(i)
+					+ " " + "PONTOS</html>");
+			jogador.setFont(new Font("", Font.BOLD, 16));
+			jogador.setForeground(Color.WHITE);
+
+			jogador.setHorizontalAlignment(JLabel.CENTER);
+
+			if (i == 0) {
+				jogador.setBackground(Color.white);
+				JPanel p = configurarCorVerde();
+				p.add(jogador);
+				painel.add(p);
+			} else {
+				jogador.setBorder(new LineBorder(Color.black));
+				painel.add(jogador);
+			}
+		}
+
 		return painel;
 	}
-	
+
 	private JPanel configurarPainelCentro() {
-		
+
 		JPanel painel = configurarCor();
 
-        painel.setLayout(new BorderLayout());
-        
-        JPanel painelNorte = configurarCor();
-        painelNorte.setLayout(new GridLayout(2, 1));
-        
-        JLabel texto = new JLabel("<html>Vez do Jogador 1 (JOGADOR DA VEZ)<html>");
-        texto.setFont(new Font("",Font.BOLD,16));
-		texto.setForeground(Color.WHITE);
-        texto.setHorizontalAlignment(JLabel.CENTER);
-        
-        JLabel texto2 = new JLabel("<html>Escolha uma Carta<html>");
-        texto2.setFont(new Font("",Font.BOLD,16));
-		texto2.setForeground(Color.WHITE);
-        texto2.setHorizontalAlignment(JLabel.CENTER);
-        
-        painelNorte.add(texto);
-        painelNorte.add(texto2);
-        painel.add(painelNorte, BorderLayout.NORTH);
-        
-        JPanel painelCartas = configurarCor();
-        painelCartas.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        painelCartas.setLayout(new GridLayout(2, 3, 10, 10));
-        painel.add(painelCartas, BorderLayout.CENTER);
-        
-        ImageIcon icon = new ImageIcon("img/mundoFuturistico.jpeg");
-        
-        for (int i = 0; i < 6; i++) {
-            JButton botaoCarta = new JButton();
-            Image resizedImage = icon.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
-            ImageIcon resizedIcon = new ImageIcon(resizedImage);
-            botaoCarta.setIcon(resizedIcon);
-            painelCartas.add(botaoCarta);
-        }
+		painel.setLayout(new BorderLayout());
 
-        
-        JPanel painelSul = configurarCor();
-        painelSul.setLayout(new GridLayout(2, 1));
-        
-        JLabel textoDica = new JLabel("Escreva uma dica: ");
-        textoDica.setFont(new Font("",Font.BOLD,16));
+		JPanel painelNorte = configurarCor();
+		painelNorte.setLayout(new GridLayout(2, 1));
+
+		JLabel texto = new JLabel("<html>Vez do Jogador 1 (JOGADOR DA VEZ)<html>");
+		texto.setFont(new Font("", Font.BOLD, 16));
+		texto.setForeground(Color.WHITE);
+		texto.setHorizontalAlignment(JLabel.CENTER);
+
+		JLabel texto2 = new JLabel("<html>Escolha uma Carta<html>");
+		texto2.setFont(new Font("", Font.BOLD, 16));
+		texto2.setForeground(Color.WHITE);
+		texto2.setHorizontalAlignment(JLabel.CENTER);
+
+		painelNorte.add(texto);
+		painelNorte.add(texto2);
+		painel.add(painelNorte, BorderLayout.NORTH);
+
+		JPanel painelCartas = configurarCor();
+		painelCartas.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		painelCartas.setLayout(new GridLayout(2, 3, 10, 10));
+		painel.add(painelCartas, BorderLayout.CENTER);
+
+		for (Carta carta : partida.getRodadaAtual().getJogadorDaJogada().getBaralho().getCartas()) {
+			BotaoCarta botaoCarta = new BotaoCarta("", carta, new Selecionar());
+			painelCartas.add(botaoCarta);
+		}
+
+		JPanel painelSul = configurarCor();
+		painelSul.setLayout(new GridLayout(2, 1));
+
+		JLabel textoDica = new JLabel("Escreva uma dica: ");
+		textoDica.setFont(new Font("", Font.BOLD, 16));
 		textoDica.setForeground(Color.WHITE);
-        textoDica.setHorizontalAlignment(JLabel.CENTER);
-        
-        dica = new JTextField();
-		
+		textoDica.setHorizontalAlignment(JLabel.CENTER);
+
+		dica = new JTextField();
+
 		Font fonte = dica.getFont();
-        float novoTamanho = fonte.getSize() + 10;
-        dica.setFont(fonte.deriveFont(novoTamanho));
-        
-        painelSul.add(textoDica);
-        painelSul.add(dica);
-        
-        painel.add(painelSul, BorderLayout.SOUTH);
-		
+		float novoTamanho = fonte.getSize() + 10;
+		dica.setFont(fonte.deriveFont(novoTamanho));
+
+		painelSul.add(textoDica);
+		painelSul.add(dica);
+
+		painel.add(painelSul, BorderLayout.SOUTH);
+
 		return painel;
 	}
-	
+
 	private JButton botaoPronto() {
-		
+
 		JButton botao = new JButton("PRONTO");
-		
+
 		botao.setBackground(Color.white);
-		botao.setFont(new Font("",Font.BOLD,16));
-		botao.addActionListener(new acaoComecar());
-		
+		botao.setFont(new Font("", Font.BOLD, 16));
+		botao.addActionListener(new Avancar());
+
 		return botao;
 	}
-	
-	private class acaoComecar implements ActionListener {
+
+	private class Avancar implements ActionListener {
+
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(Janela,"Vez do Jogaodor 2", "VEZ DO JOGADOR 2", JOptionPane.INFORMATION_MESSAGE, null);	
-			new TelaJogadorComum(partida, dica.getText());
-			Janela.dispose();
+			try {
+				partida.getRodadaAtual().getJogadorDaJogada().efetuarJogada(botaoCartaSelecionado.getCarta(),
+						dica.getText(), partida.getRodadaAtual());
+				JOptionPane.showMessageDialog(Janela,
+						"Vez de " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
+						"VEZ DE " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
+						JOptionPane.INFORMATION_MESSAGE, null);
+				new TelaJogadorComum(partida, dica.getText());
+				Janela.dispose();
+			} catch (Exception ep) {
+				JOptionPane.showMessageDialog(Janela, "Alerta", ep.getMessage(), JOptionPane.INFORMATION_MESSAGE, null);
+			}
 		}
 	}
-	
+
+	private class Selecionar implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			BotaoCarta botaoCarta = (BotaoCarta) e.getSource();
+			setBotaoCartaSelecionado(botaoCarta);
+		}
+	}
+
+	public BotaoCarta getBotaoCartaSelecionado() {
+		return botaoCartaSelecionado;
+	}
+
+	public void setBotaoCartaSelecionado(BotaoCarta botaoCartaSelecionado) {
+		this.botaoCartaSelecionado = botaoCartaSelecionado;
+	}
+
 //	public void visibilidadeCartas(int i) {
 //		for(int j = 0;j<4;j++) {
 //			if(j == i)
 //				this.add(telaCartas[j],BorderLayout.CENTER);
 //		}
 //	}
-	
+
 //	public void rodarTelaInicial() {
 //		
 //	}
