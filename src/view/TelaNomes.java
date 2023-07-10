@@ -173,10 +173,10 @@ public class TelaNomes extends JFrame{
 			else {
 				
 				ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
-				jogadores.add(new Jogador(IDJogador._1_.getId(), nomeJog1.getText()));
-				jogadores.add(new Jogador(IDJogador._2_.getId(), nomeJog2.getText()));
-				jogadores.add(new Jogador(IDJogador._3_.getId(), nomeJog3.getText()));
-				jogadores.add(new Jogador(IDJogador._4_.getId(), nomeJog4.getText()));
+				jogadores.add(new Jogador(IDJogador._1_, nomeJog1.getText()));
+				jogadores.add(new Jogador(IDJogador._2_, nomeJog2.getText()));
+				jogadores.add(new Jogador(IDJogador._3_, nomeJog3.getText()));
+				jogadores.add(new Jogador(IDJogador._4_, nomeJog4.getText()));
 				
 				Partida partida = new Partida(jogadores);
 				

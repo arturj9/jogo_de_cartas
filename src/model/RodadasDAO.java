@@ -16,7 +16,7 @@ public class RodadasDAO {
 					+ "(JogadorDaVez, CartaEscolhida, FraseDica, EscolhaJogador1, EscolhaJogador2, EscolhaJogador3, EscolhaJogador4, PontuaçãoJogador1, PontuaçãoJogador2, PontuaçãoJogador3, PontuaçãoJogador4)"
 					+ "values (?,?,?,?,?,?,?,?,?,?,?)");
 
-			inserir.setInt(1, rodada.getJogadorDaVez().getId());
+			inserir.setInt(1, rodada.getJogadorDaVez().getId().getId());
 			inserir.setString(2, rodada.getJogadaJogadorDaVez().getCarta().getNome());
 			inserir.setString(3, rodada.getJogadaJogadorDaVez().getDica());
 			

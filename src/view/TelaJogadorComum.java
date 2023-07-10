@@ -201,10 +201,9 @@ public class TelaJogadorComum extends JFrame {
 		
 		ArrayList<Carta> cartas;
 		
-		if(partida.getRodadaAtual().verificaFaseInicial()) {
-			System.out.println(partida.getRodadaAtual().getBaralhoJogadasFinaisEmbaralhado().getCartas().size());
+		if(partida.getRodadaAtual().verificaFaseInicial())
 			cartas = partida.getRodadaAtual().getBaralhoJogadasIniciaisEmbaralhado().getCartas();
-		}else
+		else
 			cartas = partida.getRodadaAtual().getJogadorDaJogada().getBaralho().getCartas();
 
 		for (Carta carta : cartas) {
