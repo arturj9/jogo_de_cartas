@@ -236,7 +236,7 @@ public class TelaJogadorComum extends JFrame {
 						JOptionPane.showMessageDialog(janela, "Fim", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE, null);
 					} else {
 						janela.dispose();
-						
+						new TelaResultadoRodada(partida);
 					}
 				} else {
 					janela.dispose();
