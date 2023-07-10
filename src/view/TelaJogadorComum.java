@@ -61,32 +61,6 @@ public class TelaJogadorComum extends JFrame {
 		this.add(painelCentro, BorderLayout.CENTER);
 		this.add(painelSul, BorderLayout.SOUTH);
 
-////		contRodadas = 0;
-////		idCarta = -1;
-////		ids = new ArrayList<Integer>();
-//		
-//		telaCartas = new JPanel[4];
-//		this.setSize(700,700);
-//		this.setLayout(new BorderLayout());
-//		this.setLocationRelativeTo(null);
-//		telaCartas[0] = new TelaCartas(this);
-//		telaCartas[1] = new TelaCartas(this);
-//		telaCartas[2] = new TelaCartas(this);
-//		telaCartas[3] = new TelaCartas(this);
-//		
-//		JPanel cartas = new JPanel();
-//		cartas.setBorder(new LineBorder(Color.black));
-//		JPanel cartas1 = new JPanel();
-////		cartas1.add(l1);
-//		this.add(cartas1,BorderLayout.SOUTH);
-////		this.add(telaCartas[0],BorderLayout.CENTER);
-////		this.add(telaCartas[1],BorderLayout.CENTER);
-////		this.add(telaCartas[2],BorderLayout.CENTER);
-////		this.add(telaCartas[3],BorderLayout.CENTER);
-////		
-//		visibilidadeCartas(2);
-//	
-////		
 		this.setVisible(true);
 	}
 
