@@ -186,15 +186,24 @@ public class TelaJogadorComum extends JFrame {
 
 		ArrayList<Carta> cartas;
 
-		if (partida.getRodadaAtual().verificaFaseInicial())
+		if (partida.getRodadaAtual().verificaFaseInicial()) {
 			cartas = partida.getRodadaAtual().getBaralhoJogadasIniciaisEmbaralhado().getCartas();
-		else
+			for (Carta carta : cartas) {
+				BotaoCarta botaoCarta = new BotaoCarta("", carta, new Selecionar());
+				if (partida.getRodadaAtual().getJogadaInicialByJogador(partida.getRodadaAtual().getJogadorDaJogada())
+						.getCarta() != carta) {
+					botoesCartas.add(botaoCarta);
+					painelCartas.add(botaoCarta);
+				}
+			}
+		} else {
 			cartas = partida.getRodadaAtual().getJogadorDaJogada().getBaralho().getCartas();
+			for (Carta carta : cartas) {
+				BotaoCarta botaoCarta = new BotaoCarta("", carta, new Selecionar());
 
-		for (Carta carta : cartas) {
-			BotaoCarta botaoCarta = new BotaoCarta("", carta, new Selecionar());
-			botoesCartas.add(botaoCarta);
-			painelCartas.add(botaoCarta);
+				botoesCartas.add(botaoCarta);
+				painelCartas.add(botaoCarta);
+			}
 		}
 
 		if (botoesCartas.size() == 4) {
