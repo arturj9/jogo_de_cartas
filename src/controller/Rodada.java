@@ -48,39 +48,6 @@ public class Rodada implements Pontuacao {
 		}
 	}
 
-	public boolean verificarPontuacaoDicaFacil() {
-		for (Jogador jogador : jogadores) {
-			if (getJogadaFinalByJogador(jogador).getCarta() != getJogadaJogadorDaVez().getCarta())
-				return false;
-		}
-		return true;
-	}
-
-	public boolean verificarPontuacaoDicaDificil() {
-		for (Jogador jogador : jogadores) {
-			if (getJogadaFinalByJogador(jogador).getCarta() == getJogadaJogadorDaVez().getCarta())
-				return false;
-		}
-		return true;
-	}
-
-	public boolean verificaFaseInicial() {
-		if (jogadasIniciais.size() == getTodosJogadores().size())
-			return true;
-		return false;
-	}
-	
-	public Baralho getBaralhoJogadasIniciaisEmbaralhado() {
-		ArrayList<Carta> cartas = new ArrayList<Carta>();
-		for (Jogada jogada : jogadasIniciais) {
-			cartas.add(jogada.getCarta());
-		}
-
-		Baralho baralho = new Baralho(cartas);
-		return baralho.getEmbaralhado();
-	}
-
-
 	public Jogador getJogadorById(IDJogador id) {
 		for (Jogador jogador : getTodosJogadores()) {
 			if (jogador.getId() == id)
@@ -91,6 +58,16 @@ public class Rodada implements Pontuacao {
 
 	public Jogada getJogadaJogadorDaVez() {
 		return jogadasIniciais.get(0);
+	}
+
+	public Baralho getBaralhoJogadasIniciaisEmbaralhado() {
+		ArrayList<Carta> cartas = new ArrayList<Carta>();
+		for (Jogada jogada : jogadasIniciais) {
+			cartas.add(jogada.getCarta());
+		}
+
+		Baralho baralho = new Baralho(cartas);
+		return baralho.getEmbaralhado();
 	}
 
 	public Jogada getJogadaFinalByJogadorId(IDJogador id) {
@@ -130,6 +107,28 @@ public class Rodada implements Pontuacao {
 			todosJogadores.add(jogador);
 		}
 		return todosJogadores;
+	}
+
+	public boolean verificarPontuacaoDicaFacil() {
+		for (Jogador jogador : jogadores) {
+			if (getJogadaFinalByJogador(jogador).getCarta() != getJogadaJogadorDaVez().getCarta())
+				return false;
+		}
+		return true;
+	}
+
+	public boolean verificarPontuacaoDicaDificil() {
+		for (Jogador jogador : jogadores) {
+			if (getJogadaFinalByJogador(jogador).getCarta() == getJogadaJogadorDaVez().getCarta())
+				return false;
+		}
+		return true;
+	}
+
+	public boolean verificaFaseInicial() {
+		if (jogadasIniciais.size() == getTodosJogadores().size())
+			return true;
+		return false;
 	}
 
 	public ArrayList<Jogador> getJogadores() {
