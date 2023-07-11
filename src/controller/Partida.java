@@ -16,19 +16,32 @@ public class Partida {
 		rodadas.add(new Rodada(jogadorDaVez, getJogadoresComuns(jogadorDaVez)));
 	}
 
+	public Rodada getRodadaAtual() {
+		if (rodadas.size() == 0)
+			return null;
+		return rodadas.get(rodadas.size() - 1);
+	}
+
 	public boolean proximaRodada() {
 		getRodadaAtual().calcularPontuacao();
 		new RodadasDAO().inserir(getRodadaAtual());
-		if(verificarFimDeJogo()) {
+		if (verificarFimDeJogo()) {
 			return true;
-		}else {
+		} else {
 			Jogador proximoJogadorDaVez = getProximoJogadorDaVez();
 			rodadas.add(new Rodada(proximoJogadorDaVez, getJogadoresComuns(proximoJogadorDaVez)));
 			return false;
 		}
 
 	}
-	
+
+	public boolean verificarFimDeJogo() {
+		for (Jogador jogador : jogadores) {
+			if (jogador.getPontuacao() >= 10)
+				return true;
+		}
+		return false;
+	}
 
 	public boolean verificaProximaRodada() {
 		if (getRodadaAtual().getJogadorDaJogada() == null)
@@ -52,26 +65,12 @@ public class Partida {
 		return jogadores;
 	}
 
-	public boolean verificarFimDeJogo() {
-		for (Jogador jogador : jogadores) {
-			if (jogador.getPontuacao() >= 10)
-				return true;
-		}
-		return false;
-	}
-
 	public String getNomeJogador(int indice) {
 		return jogadores.get(indice).getNome();
 	}
 
 	public int getPontosJogador(int indice) {
 		return jogadores.get(indice).getPontuacao();
-	}
-
-	public Rodada getRodadaAtual() {
-		if (rodadas.size() == 0)
-			return null;
-		return rodadas.get(rodadas.size() - 1);
 	}
 
 	public ArrayList<Jogador> getJogadores() {

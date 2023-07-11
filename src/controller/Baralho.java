@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Baralho {
+	
 	private ArrayList<Carta> cartas;
 
 	public Baralho(ArrayList<Carta> cartas) {

@@ -1,6 +1,7 @@
 package controller;
 
 public enum IDJogador {
+	
 	_1_(1),
 	_2_(2),
 	_3_(3),
