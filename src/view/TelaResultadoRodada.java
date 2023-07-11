@@ -129,6 +129,7 @@ public class TelaResultadoRodada extends JFrame {
 	
 	private class proximaRodada implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			janela.dispose();
 			new TelaJogadorVez(partida);
 			}
 		}
