@@ -200,13 +200,12 @@ public class TelaJogadorComum extends JFrame {
 			cartas = partida.getRodadaAtual().getJogadorDaJogada().getBaralho().getCartas();
 			for (Carta carta : cartas) {
 				BotaoCarta botaoCarta = new BotaoCarta("", carta, new Selecionar());
-
 				botoesCartas.add(botaoCarta);
 				painelCartas.add(botaoCarta);
 			}
 		}
 
-		if (botoesCartas.size() == 4) {
+		if (botoesCartas.size() == 3) {
 			for (int i = 0; i < botoesCartas.size(); i++) {
 				ImageIcon aux = botoesCartas.get(i).getCarta().getIcon(350, 255);
 				botoesCartas.get(i).setIcon(aux);
@@ -240,13 +239,14 @@ public class TelaJogadorComum extends JFrame {
 				partida.getRodadaAtual().getJogadorDaJogada().efetuarJogada(botaoCartaSelecionado.getCarta(),
 						partida.getRodadaAtual());
 				if (partida.verificaProximaRodada()) {
+					Carta cartaEscolhida = partida.getRodadaAtual().getJogadaJogadorDaVez().getCarta();
 					if (partida.proximaRodada()) {
 						janela.dispose();
 						JOptionPane.showMessageDialog(janela, "Fim", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE,
 								null);
 					} else {
 						janela.dispose();
-
+						new TelaResultadoRodada(partida,cartaEscolhida);
 					}
 				} else {
 					janela.dispose();

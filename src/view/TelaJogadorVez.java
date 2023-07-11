@@ -222,41 +222,44 @@ public class TelaJogadorVez extends JFrame {
 			if (aux.isEmpty()) {
 				JOptionPane.showMessageDialog(janela, "Escreva a DICA antes de apertar no botão 'PRONTO'!", "Erro!",
 						JOptionPane.ERROR_MESSAGE, null);
+			} else if (botaoCartaSelecionado == null) {
+				JOptionPane.showMessageDialog(janela, "Selecione uma carta!", "Erro!",
+						JOptionPane.ERROR_MESSAGE, null);
 			} else {
-				try {
-					janela.dispose();
+			try {
+				janela.dispose();
 
-					partida.getRodadaAtual().getJogadorDaJogada().efetuarJogada(botaoCartaSelecionado.getCarta(),
-							dica.getText(), partida.getRodadaAtual());
-					JOptionPane.showMessageDialog(janela,
-							"Vez de " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
-							"VEZ DE " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
-							JOptionPane.INFORMATION_MESSAGE, null);
-					new TelaJogadorComum(partida, dica.getText(), 1);
-					janela.dispose();
-				} catch (Exception ep) {
-					JOptionPane.showMessageDialog(janela, "Alerta", ep.getMessage(), JOptionPane.INFORMATION_MESSAGE,
-							null);
-				}
+				partida.getRodadaAtual().getJogadorDaJogada().efetuarJogada(botaoCartaSelecionado.getCarta(),
+						dica.getText(), partida.getRodadaAtual());
+				JOptionPane.showMessageDialog(janela,
+						"Vez de " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
+						"VEZ DE " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
+						JOptionPane.INFORMATION_MESSAGE, null);
+				new TelaJogadorComum(partida, dica.getText(), 1);
+				janela.dispose();
+			} catch (Exception ep) {
+				JOptionPane.showMessageDialog(janela, "Alerta", ep.getMessage(), JOptionPane.INFORMATION_MESSAGE, null);
 			}
 		}
 	}
+}
 
-	private class Selecionar implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			BotaoCarta botaoCarta = (BotaoCarta) e.getSource();
-			int indiceBotao = botoesCartas.indexOf(botaoCarta);
+private class Selecionar implements ActionListener {
+	public void actionPerformed(ActionEvent e) {
+		BotaoCarta botaoCarta = (BotaoCarta) e.getSource();
+		int indiceBotao = botoesCartas.indexOf(botaoCarta);
 
-			for (int i = 0; i < botoesCartas.size(); i++) {
-				if (i == indiceBotao) {
-					botoesCartas.get(i).setBorder(new LineBorder(Color.black, 5));
-				} else {
-					botoesCartas.get(i).setBorder(null);
-				}
+		for (int i = 0; i < botoesCartas.size(); i++) {
+			if (i == indiceBotao) {
+				botoesCartas.get(i).setBorder(new LineBorder(Color.black, 5));
+			} else {
+				botoesCartas.get(i).setBorder(null);
 			}
-
-			setBotaoCartaSelecionado(botaoCarta);
 		}
+
+		setBotaoCartaSelecionado(botaoCarta);
+	}
+
 	}
 
 	public BotaoCarta getBotaoCartaSelecionado() {

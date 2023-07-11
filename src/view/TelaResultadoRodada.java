@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import controller.Carta;
 import controller.Partida;
 import controller.Rodada;
 
@@ -27,12 +28,14 @@ public class TelaResultadoRodada extends JFrame {
 	private JFrame janela;
 	private Partida partida;
 	private Rodada rodada;
+	private Carta cartaEscolhida;
 	
-	public TelaResultadoRodada(Partida p) {
+	public TelaResultadoRodada(Partida p, Carta cartaEscolhida) {
 		
 		janela = this;
 		partida = p;
 		rodada = partida.getRodadaAtual();
+		setCartaEscolhida(cartaEscolhida);
 		
 		this.setTitle("Resultado Da Rodada");
 		this.setSize(700,700);
@@ -73,7 +76,7 @@ public class TelaResultadoRodada extends JFrame {
 		
 		JButton botaoCarta = new JButton();
 		botaoCarta.setPreferredSize(new Dimension(300,300));
-		botaoCarta.setIcon(rodada.getJogadaJogadorDaVez().getCarta().getIcon(250, 250));
+		botaoCarta.setIcon(cartaEscolhida.getIcon(350, 300));
 		
 		
 		painelCentro.add(painelAux);
@@ -126,11 +129,14 @@ public class TelaResultadoRodada extends JFrame {
 	
 	private class proximaRodada implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(janela,
-					"Vez de " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
-					"VEZ DE " + partida.getRodadaAtual().getJogadorDaJogada().getNome(),
-					JOptionPane.INFORMATION_MESSAGE, null);
 			new TelaJogadorVez(partida);
 			}
 		}
+	
+	public Carta getCartaEscolhida() {
+		return cartaEscolhida;
+	}
+	public void setCartaEscolhida(Carta cartaEscolhida) {
+		this.cartaEscolhida = cartaEscolhida;
+	}
 }
