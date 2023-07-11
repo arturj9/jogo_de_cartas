@@ -123,7 +123,7 @@ public class TelaJogadorComum extends JFrame {
 
 		JPanel painel = configurarCor();
 		painel.setLayout(new GridLayout(1, 4));
-		ArrayList<Jogador> listaJogadores = rodada.getTodosJogadores();
+		ArrayList<Jogador> listaJogadores = partida.getJogadores();
 
 		for (int i = 0; i < 4; i++) {
 			JLabel jogador = new JLabel("<html>" + partida.getNomeJogador(i) + "<br>" + partida.getPontosJogador(i)
